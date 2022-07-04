@@ -1,30 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { user } from '../Context'
 
 function View() {
     const nav = useNavigate()
     const {id} = useParams()
-    const values = useContext(user)
-    
     const [data,setdata] = useState({
+        id:"",
         student:"",
         teacher:""
     })
 
     useEffect(()=>{
-        displaydata()
+        getdata()
     },[])
 
-    const displaydata = () => {
-        const array = values.list.filter(item => item.id == id)
-        setdata({
-            student:array[0].student,
-            teacher:array[0].teacher
-        })
+    const getdata = async () => {
+        let response = await axios.get(`https://623fff530adaf66ad7494807.mockapi.io/axios/${id}`)
+        setdata(response.data)
     }
-    return (
+  return (
     <div className='view'>
+        <h1>ID of the Student : {data.id}</h1>
         <h1>Name of the Student : {data.student}</h1>
         <h1>Name of the Teacher : {data.teacher}</h1>
         <button onClick={()=>nav("/")}>Go Back</button>

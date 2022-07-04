@@ -1,8 +1,8 @@
 import React from 'react'
-import {NavLink, Route, Routes} from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Header from './Header'
-import Input from './input/input'
 import Edit from './table/Edit'
+import Input from './table/Input'
 import Table from './table/Table'
 import View from './table/View'
 
@@ -12,10 +12,10 @@ function Components() {
         <Header />
         <div className='mainbody'>
         <Routes>
-            <Route path="/" element={<Table />} />
-            <Route path="/addinput" element={<Input />} />
-            <Route path='/edit/:id' element={<Edit />} />
-            <Route path='/view/:id' element={<View />} />
+            <Route path='/' element={<Table />} />
+            <Route path='/addinput' element={<Input />} />
+            <Route path={`/view/:id`} element={<View />} />
+            <Route path={`/edit/:id`} element={<Edit />} />
         </Routes>
         </div>
     </div>

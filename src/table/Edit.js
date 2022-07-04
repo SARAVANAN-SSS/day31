@@ -1,44 +1,40 @@
-import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { user } from '../Context'
 
 function Edit() {
     const nav = useNavigate()
     const {id} = useParams()
-    const values = useContext(user)
     const [list,setlist] = useState({
-        id:"",
         student:"",
         teacher:""
     })
-    
-    useEffect(()=>{
-        updatedata()
-    },[])
-    
-    const updatedata = () => {
-        const array = values.list.filter(item => item.id == id)
-        setlist({
-                id:array[0].id,
-                student:array[0].student,
-                teacher:array[0].teacher
-            })
-    }
 
+    useEffect(()=>{
+        getdata()
+    },[])
+
+    const getdata = async () => {
+        let response = await axios.get(`https://623fff530adaf66ad7494807.mockapi.io/axios/${id}`)
+        setlist({
+            student:response.data.student,
+            teacher:response.data.teacher
+        })
+    }
     const handlechange = (e) => {
         e.preventDefault()
         setlist({...list,[e.target.name]:e.target.value})
     }
 
-    const handlesubmit = (e) => {
+    const handlesubmit = async (e) => {
         e.preventDefault()
-        values.savedData(list)
+        let response = await axios.put(`https://623fff530adaf66ad7494807.mockapi.io/axios/${id}`,list)
         nav("/")
-
     }
   return (
     <div>
-        <form onSubmit={handlesubmit} className="edit">
+        <div>
+        <form  onSubmit={handlesubmit} className="editform">
             <input type={"tetx"} placeholder="Enter Student Name" value={list.student} onChange={handlechange} name="student" required="required"/>
             <br />
             <br />
@@ -47,6 +43,7 @@ function Edit() {
             <br />
             <button>Save</button>
         </form>
+    </div>
     </div>
   )
 }

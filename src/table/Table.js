@@ -1,13 +1,28 @@
-import React, { useContext } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { user } from '../Context'
 
 function Table() {
-    const values = useContext(user)
+    const [list,setlist] = useState([])
+
+    useEffect(()=>{
+        getdata()
+    },[])
+
+    const getdata = async () =>{
+        let response = await axios.get("https://623fff530adaf66ad7494807.mockapi.io/axios")
+        setlist(response.data)
+    }
+
+    const deletehandle = async (e,id) => {
+        e.preventDefault()
+        let response = await axios.delete(`https://623fff530adaf66ad7494807.mockapi.io/axios/${id}`)
+        getdata()
+    }
   return (
     <div>
         {
-            values.list == ""? <h1>No Data To Display Plz Add Data</h1>
+            list == "" ? <h1>No Data to Display</h1>
             :(
                 <table className='table'>
                     <thead>
@@ -20,20 +35,20 @@ function Table() {
                     </thead>
                     <tbody>
                         {
-                            values.list.map((item,index) => {
+                            list.map((item,index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{index+1}</td>
+                                        <td>{item.id}</td>
                                         <td>{item.student}</td>
                                         <td>{item.teacher}</td>
                                         <td>
                                             <NavLink to={`/view/${item.id}`}><button className='viewbtn'>View</button></NavLink>
                                         </td>
                                         <td>
-                                            <NavLink to= {`/edit/${item.id}`}><button className='editbtn'>Edit</button></NavLink>
+                                            <NavLink to={`/edit/${item.id}`}><button className='editbtn'>Edit</button></NavLink>
                                         </td>
                                         <td>
-                                            <button onClick={()=>values.deletedata(item)} className="deletebtn">Delete</button>
+                                            <button onClick={(e)=>deletehandle(e,item.id)} className="deletebtn">Delete</button>
                                         </td>
                                     </tr>
                                 )

@@ -1,28 +1,31 @@
 .header{
   background-color: black;
   height: 50px;
-  margin: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-.header > .btn{
+.btna{
   margin-right: 10px;
   margin-left: 10px;
 }
 .btnt{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.tbtn{
   background-color: blue;
   color: white;
   border-color: blue;
-  padding: 5px;
   border-radius: 10px;
+  padding: 7px;
 }
-.btna{
-  background-color: red;
+.abtn{
   border-color: red;
-  padding: 5px;
   border-radius: 10px;
+  padding: 7px;
+  background-color: red;
 }
 .mainbody{
   background-color: aquamarine;
@@ -38,13 +41,6 @@
   align-items: center;
   justify-content: center;
 }
-.formtag > button{
-  background-color: green;
-  border-color: green;
-  color: white;
-  border-radius: 10px;
-  padding: 7px;
-}
 .table{
   border: 2px solid black;
 }
@@ -52,47 +48,54 @@ tr,td,th{
   border: 2px solid black;
   text-align: center;
 }
-.edit{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.edit> button{
-  background-color: green;
-  border-color: green;
-  color: white;
-  padding: 7px;
-  border-radius: 10px
-}
 .view{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.view > button{
-  background-color: green;
-  border-radius: 10px;
-  border-color: green;
-  color: white;
-  padding: 7px;
+.editform{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.viewbtn{
-  background-color: blue;
-  border-color: blue;
-  color: white;
+.editform > button{
+  background-color: green;
+  border-color: green;
+  padding: 7px;
   border-radius: 10px;
+  color: white;
+}
+.view > button {
+  background-color: green;
+  border-color: green;
+  padding: 7px;
+  border-radius: 10px;
+  color: white;
+}
+.formtag > button{
+  background-color: green;
+  border-color: green;
+  padding: 7px;
+  border-radius: 10px;
+  color: white;
+}
+.deletebtn{
+  background-color: red;
+  border-color: red;
+  border-radius: 10px;
+  color: white;
 }
 .editbtn{
   background-color: orange;
   border-color: orange;
+  border-radius: 10px;
   color: black;
-  border-radius: 10px;
 }
-.deletebtn{
-  background-color: red;
-  color: white;
-  border-color: #ff0000;
+.viewbtn{
+  background-color: blue;
+  border-color: blue;
   border-radius: 10px;
+  color: white;
 }

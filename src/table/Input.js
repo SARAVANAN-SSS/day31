@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react'
-import {nanoid} from "nanoid"
-import { user } from '../Context'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import  axios from "axios"
+
 
 function Input() {
     const nav = useNavigate()
-    const values = useContext(user)
     const [data,setdata] = useState({
         student:"",
         teacher:""
@@ -15,18 +14,22 @@ function Input() {
         setdata({...data,[e.target.name]:e.target.value})
     }
 
-    const submitvalues = (e) =>{
+    const submitvalues = async (e) =>{
         e.preventDefault()
         const finaldata = {
-            id:nanoid(),
             student:data.student,
             teacher:data.teacher
         }
-        values.adddetails(finaldata)
+        let response = await axios.post("https://623fff530adaf66ad7494807.mockapi.io/axios",finaldata)
+        setdata({
+            student:"",
+            teacher:""
+        })
         nav("/")
     }
   return (
     <div>
+        <div>
         <form onSubmit={submitvalues} className="formtag">
             <input type="text" placeholder='Enter Student Name' name="student" required="required" value={data.student} onChange={handlechange}/>
             <br />
@@ -36,6 +39,7 @@ function Input() {
             <br />
             <button>Submit</button>
         </form>
+    </div>
     </div>
   )
 }
